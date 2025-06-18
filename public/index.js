@@ -1358,7 +1358,7 @@ let menu = (function () {
 
   for (let k = 4; k < menu.items.length; ++k) {
     menu.items[k].element.addEventListener("click", () => {
-      events.push({ event: "nbpieces", nbpieces: [15, 25, 50, 100, 200][k - 4] });
+      events.push({ event: "nbpieces", nbpieces: [15, 25, 50][k - 4] });
     });
   }
 
