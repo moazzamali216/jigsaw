@@ -982,117 +982,30 @@
       } // spreadInRectangle
       //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-      optimInitial() {
-        /* based on :
-        - container dimensions
-        - picture dimensions
-        - piece dimensions
+optimInitial() {
+  /* Places all pieces near the center of the container in a wider spread */
 
-        moves the pieces at the beginning of the game along one to four sides of the container
+  const centerX = this.contWidth / 2.72;
+  const centerY = this.contHeight / 2.72;
 
-        */
-        // extreme values for 1 piece polypieces
-        const minx = -this.scalex / 2;
-        const miny = -this.scaley / 2;
-        const maxx = this.contWidth - 1.5 * this.scalex;
-        const maxy = this.contHeight - 1.5 * this.scaley;
-        // how much space left around image ?
-        let freex = this.contWidth - this.gameWidth;
-        let freey = this.contHeight - this.gameHeight;
+  // Increase the spreading area (4x piece size in both directions)
+  const spreadFactor = 2; // Multiplied by piece size on each side of center
 
-        let where = [0, 0, 0, 0]; // to record on which sides pieces will be moved
-        let rects = [];
-        // first evaluation
-        if (freex > 1.5 * this.scalex) {
-          where[1] = 1; // right
-          rects[1] = {
-            x0: this.gameWidth - 0.5 * this.scalex,
-            x1: maxx,
-            y0: miny, y1: maxy
-          };
-        }
-        if (freex > 3 * this.scalex) {
-          where[3] = 1; // left
-          rects[3] = {
-            x0: minx,
-            x1: freex / 2 - 1.5 * this.scalex,
-            y0: miny, y1: maxy
-          };
-          rects[1].x0 = this.contWidth - freex / 2 - 0.5 * this.scalex;
-        }
-        if (freey > 1.5 * this.scaley) {
-          where[2] = 1; // bottom
-          rects[2] = {
-            x0: minx, x1: maxx,
-            y0: this.gameHeight - 0.5 * this.scaley,
-            y1: this.contHeight - 1.5 * this.scaley
-          };
-        }
-        if (freey > 3 * this.scaley) {
-          where[0] = 1; // top
-          rects[0] = {
-            x0: minx, x1: maxx,
-            y0: miny,
-            y1: freey / 2 - 1.5 * this.scaley
-          };
-          rects[2].y0 = this.contHeight - freey / 2 - 0.5 * this.scaley;
-        }
-        if (where.reduce((sum, a) => sum + a) < 2) {
-          // if no place defined yet, or only one place
-          if (freex - freey > 0.2 * this.scalex || where[1]) {
-            // significantly more place horizontally : to right
-            this.spreadInRectangle({
-              x0: this.gameWidth - this.scalex / 2,
-              x1: maxx,
-              y0: miny,
-              y1: maxy
-            });
-          } else if (freey - freex > 0.2 * this.scalex || where[2]) {
-            // significantly more place vertically : to bottom
-            this.spreadInRectangle({
-              x0: minx,
-              x1: maxx,
-              y0: this.gameHeight - this.scaley / 2,
-              y1: maxy
-            });
-          } else {
-            if (this.gameWidth > this.gameHeight) {
-              // more wide than high : to bottom
-              this.spreadInRectangle({
-                x0: minx,
-                x1: maxx,
-                y0: this.gameHeight - this.scaley / 2,
-                y1: maxy
-              });
+  const rect = {
+    x0: centerX - spreadFactor * this.scalex,
+    x1: centerX + spreadFactor * this.scalex,
+    y0: centerY - spreadFactor * this.scaley,
+    y1: centerY + spreadFactor * this.scaley
+  };
 
-            } else { // to right
-              this.spreadInRectangle({
-                x0: this.gameWidth - this.scalex / 2,
-                x1: maxx,
-                y0: miny,
-                y1: maxy
-              });
-            }
-          }
-          return;
-        }
-        /* more than one area to put the pieces
-        */
-        let nrects = [];
-        rects.forEach(rect => {
-          nrects.push(rect);
-        });
-        let k0 = 0
-        const npTot = this.nx * this.ny;
-        for (let k = 0; k < nrects.length; ++k) {
-          let k1 = mround((k + 1) / nrects.length * npTot);
-          this.spreadSetInRectangle(this.polyPieces.slice(k0, k1), nrects[k]);
-          k0 = k1;
-        }
-        arrayShuffle(this.polyPieces);
-        this.evaluateZIndex();
+  // Randomly scatter all pieces within the larger rectangle
+  this.spreadInRectangle(rect);
 
-      } // optimInitial
+  // Shuffle and reset Z-index
+  arrayShuffle(this.polyPieces);
+  this.evaluateZIndex();
+}
+
 
       //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
