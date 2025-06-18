@@ -130,7 +130,10 @@ list-style: none;
 select{
   background-color: transparent;
   color: #7575d4;
-  border: 0;
+  border: 1px solid #7575d4;
   font-size: 16px;
+ padding: 5px 12px;
+ border-radius: 6px;
+
 }
 
