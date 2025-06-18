@@ -1006,7 +1006,6 @@ optimInitial() {
   this.evaluateZIndex();
 }
 
-
       //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
       evaluateZIndex() {
