@@ -1005,7 +1005,7 @@ optimInitial() {
   arrayShuffle(this.polyPieces);
   this.evaluateZIndex();
 }
-
+    
       //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
       evaluateZIndex() {
