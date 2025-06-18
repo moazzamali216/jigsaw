@@ -1,0 +1,136 @@
+    body {
+      font-family: Arial, Helvetica, "Liberation Sans", FreeSans, sans-serif;
+      background-color: #1e1e2f;
+      margin: 0;
+      padding: 0;
+      border-width: 0;
+      cursor: pointer;
+    }
+
+    *{
+      margin: 0;padding: 0;box-sizing: border-box;
+font-family: "Poppins", sans-serif;
+    }
+    #menu {
+      position: absolute;
+      list-style-type: none;
+        box-shadow: rgb(117, 98, 224) 10px 10px 30px;
+top: 7%;
+left: 7%;
+      z-index: 1000;
+      /* 1 */
+      height: fit-content;
+      bottom: 0;
+      background-color: #1e1e2f;;
+      padding: 4px ;
+      border-radius: 10px;
+      display: inline-block;
+      text-align: center;
+transition: all 0.25s ease-in-out !important;
+
+    }
+#menu li:hover select {
+  background-color: #7575d4;
+  color: white;
+  transition: all 0.25s ease-in-out;
+}
+
+    #menu li {
+      margin: 2px;
+     text-align: start ;
+     transition: all 0.25s ease-in-out !important;
+     padding: 10px 20px;
+color: #7575d4;
+border: 1px solid #7575d4;
+      border-radius: 5px;
+      background-color: transparent;
+    }
+
+    #menu li:hover {
+      background-color: #7575d4;
+      color: white;
+      transition: all 0.25s ease-in-out !important;
+    }
+        #menu select:hover {
+      background-color: #7575d4;
+      color: white;
+      transition: all 0.25s ease-in-out !important;
+    }
+
+    #forPuzzle {
+      position: absolute;
+      width: 95vw;
+      height: 95vh;
+      /* margin-top: 100px;
+      padding-bottom: 100px; */
+      top: 50%;
+
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #1e1e2f;
+      overflow: hidden;
+    }
+
+    .polypiece {
+      display: block;
+      overflow: hidden;
+      position: absolute;
+    }
+
+    .moving {
+      transition-property: top, left;
+      transition-duration: 1s;
+      transition-timing-function: linear;
+    }
+
+    .gameCanvas {
+      display: none;
+      overflow: hidden;
+      position: absolute;
+    }
+.navbar{
+  background: #7575d4;
+  color: white;
+  display: flex;
+  position: fixed;
+  z-index: 10000;
+  width: 100%;
+  align-items: center;
+  gap: 75px;
+  justify-content: center;
+  text-align: center;
+  box-shadow: rgb(117, 98, 224) 10px 10px 30px;
+
+  padding: 20px 0px;
+}
+@media (max-width:764px) {
+  .navbar{
+  background: #7575d4;
+  color: white;
+  display: flex;
+  position: fixed;
+  width: 100%;
+  align-items: center;
+  gap: 25px;
+  justify-content: center;
+  text-align: center;
+  box-shadow: rgb(117, 98, 224) 10px 10px 30px;
+
+  padding: 20px 0px;
+} #menu {
+  left: 25px;
+}
+
+}
+.cont-1>ul{
+display: flex;
+gap: 10px;
+list-style: none;
+}
+select{
+  background-color: transparent;
+  color: #7575d4;
+  border: 0;
+  font-size: 16px;
+}
+
